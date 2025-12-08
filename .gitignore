@@ -191,3 +191,6 @@ foundry.lock
 # Slither output
 slither-output/
 
+thinking.md
+prd.md
+idea.md
