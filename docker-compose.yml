@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: avaagent-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - AVALANCHE_RPC_URL=${AVALANCHE_RPC_URL}
+      - KITE_RPC_URL=${KITE_RPC_URL}
+      - X402_FACILITATOR_URL=${X402_FACILITATOR_URL}
+      - REAP_API_URL=${REAP_API_URL}
+      - TURF_API_URL=${TURF_API_URL}
+      - THIRDWEB_SECRET_KEY=${THIRDWEB_SECRET_KEY}
+      - ENVIRONMENT=production
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - redis
+    networks:
+      - avaagent-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Next.js Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: avaagent-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+      - NEXT_PUBLIC_AVALANCHE_RPC_URL=${AVALANCHE_RPC_URL}
+      - NEXT_PUBLIC_KITE_RPC_URL=${KITE_RPC_URL}
+    depends_on:
+      - backend
+    networks:
+      - avaagent-network
+    restart: unless-stopped
+
+  # Redis for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: avaagent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - avaagent-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Nginx Reverse Proxy (Production)
+  nginx:
+    image: nginx:alpine
+    container_name: avaagent-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - avaagent-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+networks:
+  avaagent-network:
+    driver: bridge
+
+volumes:
+  redis-data:

@@ -1,0 +1,15 @@
+{
+  "detectors_to_run": "all",
+  "exclude_informational": true,
+  "exclude_low": false,
+  "exclude_medium": false,
+  "exclude_high": false,
+  "exclude_optimization": true,
+  "exclude_dependencies": true,
+  "filter_paths": [
+    "lib/",
+    "node_modules/",
+    "test/"
+  ],
+  "legacy_ast": false
+}

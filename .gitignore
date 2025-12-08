@@ -1,0 +1,193 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# AvaAgent .gitignore
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ENVIRONMENT & SECRETS (CRITICAL - NEVER COMMIT)
+# ═══════════════════════════════════════════════════════════════════════════════
+.env
+.env.*
+!.env.example
+*.local
+*.key
+*.pem
+*.secret
+private_key*
+*.p12
+*.pfx
+backend/.env
+frontend/.env
+contracts/.env
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Node.js
+node_modules/
+.pnp/
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Python
+.venv/
+venv/
+ENV/
+env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib64/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.eggs/
+
+# Foundry/Solidity
+contracts/lib/
+contracts/node_modules/
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BUILD OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Next.js
+.next/
+out/
+frontend/.next/
+frontend/out/
+
+# Python
+build/
+dist/
+*.manifest
+*.spec
+
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
+# General
+*.tsbuildinfo
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TESTING & COVERAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+.hypothesis/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.cache
+junit.xml
+test-results/
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# IDE & EDITORS
+# ═══════════════════════════════════════════════════════════════════════════════
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.settings/
+*.code-workspace
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OPERATING SYSTEM
+# ═══════════════════════════════════════════════════════════════════════════════
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LOGS & DEBUG
+# ═══════════════════════════════════════════════════════════════════════════════
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+celerybeat-schedule
+celerybeat.pid
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPLOYMENT & CI/CD
+# ═══════════════════════════════════════════════════════════════════════════════
+.vercel
+.netlify
+.turbo
+*.tar.gz
+*.zip
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATABASE
+# ═══════════════════════════════════════════════════════════════════════════════
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+redis-data/
+postgres-data/
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCKER
+# ═══════════════════════════════════════════════════════════════════════════════
+# Don't ignore docker-compose files, but ignore local overrides
+docker-compose.override.yml
+.docker/
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MISCELLANEOUS
+# ═══════════════════════════════════════════════════════════════════════════════
+*.bak
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+*.orig
+
+# UV lock file (optional - some teams commit this)
+uv.lock
+
+# Foundry lock file
+foundry.lock
+
+# Slither output
+slither-output/
+
