@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A0A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#111111;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A0A0A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="avaxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E84142;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FC4F4F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </linearGradient>
+    <!-- Glow effects -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Grid overlay -->
+  <rect width="1200" height="400" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Decorative elements - blockchain nodes -->
+  <g opacity="0.3">
+    <!-- Left side nodes -->
+    <circle cx="50" cy="80" r="4" fill="#E84142"/>
+    <circle cx="120" cy="120" r="3" fill="#6366F1"/>
+    <circle cx="80" cy="200" r="5" fill="#8B5CF6"/>
+    <circle cx="150" cy="280" r="3" fill="#E84142"/>
+    <circle cx="60" cy="340" r="4" fill="#6366F1"/>
+    
+    <!-- Right side nodes -->
+    <circle cx="1150" cy="60" r="4" fill="#6366F1"/>
+    <circle cx="1080" cy="150" r="5" fill="#E84142"/>
+    <circle cx="1120" cy="250" r="3" fill="#8B5CF6"/>
+    <circle cx="1050" cy="320" r="4" fill="#E84142"/>
+    <circle cx="1140" cy="360" r="3" fill="#6366F1"/>
+    
+    <!-- Connecting lines -->
+    <line x1="50" y1="80" x2="120" y2="120" stroke="#E84142" stroke-width="1" opacity="0.5"/>
+    <line x1="120" y1="120" x2="80" y2="200" stroke="#6366F1" stroke-width="1" opacity="0.5"/>
+    <line x1="80" y1="200" x2="150" y2="280" stroke="#8B5CF6" stroke-width="1" opacity="0.5"/>
+    
+    <line x1="1150" y1="60" x2="1080" y2="150" stroke="#6366F1" stroke-width="1" opacity="0.5"/>
+    <line x1="1080" y1="150" x2="1120" y2="250" stroke="#E84142" stroke-width="1" opacity="0.5"/>
+    <line x1="1120" y1="250" x2="1050" y2="320" stroke="#8B5CF6" stroke-width="1" opacity="0.5"/>
+  </g>
+  
+  <!-- Logo section -->
+  <g transform="translate(200, 100)">
+    <!-- Outer ring -->
+    <circle cx="100" cy="100" r="90" fill="none" stroke="url(#avaxGradient)" stroke-width="3" opacity="0.4"/>
+    
+    <!-- Avalanche triangle (outer) -->
+    <polygon 
+      points="100,20 175,155 25,155" 
+      fill="none" 
+      stroke="url(#avaxGradient)" 
+      stroke-width="4"
+      filter="url(#glow)"
+    />
+    
+    <!-- Inner triangle (AI agent) -->
+    <polygon 
+      points="100,50 150,130 50,130" 
+      fill="url(#aiGradient)" 
+      opacity="0.9"
+    />
+    
+    <!-- AI "eye" -->
+    <circle cx="100" cy="100" r="18" fill="#0A0A0A"/>
+    <circle cx="100" cy="100" r="12" fill="url(#avaxGradient)" filter="url(#glow)"/>
+    <circle cx="100" cy="100" r="5" fill="#FFF"/>
+    
+    <!-- Neural connections -->
+    <g stroke="#6366F1" stroke-width="2" opacity="0.6">
+      <line x1="100" y1="50" x2="100" y2="82"/>
+      <line x1="65" y1="120" x2="88" y2="105"/>
+      <line x1="135" y1="120" x2="112" y2="105"/>
+    </g>
+    
+    <!-- Neural nodes -->
+    <circle cx="65" cy="120" r="5" fill="#6366F1"/>
+    <circle cx="135" cy="120" r="5" fill="#6366F1"/>
+    <circle cx="100" cy="50" r="5" fill="#E84142"/>
+  </g>
+  
+  <!-- Text section -->
+  <g transform="translate(420, 140)">
+    <!-- AvaAgent text -->
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="url(#textGradient)" filter="url(#textGlow)">
+      <tspan fill="#E84142">Ava</tspan><tspan fill="#FFFFFF">Agent</tspan>
+    </text>
+    
+    <!-- Tagline -->
+    <text x="5" y="100" font-family="Arial, sans-serif" font-size="22" fill="#888888" letter-spacing="2">
+      Agentic Infrastructure for Avalanche
+    </text>
+    
+    <!-- Feature badges -->
+    <g transform="translate(0, 130)">
+      <!-- AI Agents badge -->
+      <rect x="0" y="0" width="120" height="32" rx="16" fill="#E84142" opacity="0.2"/>
+      <rect x="0" y="0" width="120" height="32" rx="16" fill="none" stroke="#E84142" stroke-width="1"/>
+      <text x="60" y="21" font-family="Arial, sans-serif" font-size="13" fill="#E84142" text-anchor="middle">🤖 AI Agents</text>
+      
+      <!-- x402 Payments badge -->
+      <rect x="135" y="0" width="130" height="32" rx="16" fill="#6366F1" opacity="0.2"/>
+      <rect x="135" y="0" width="130" height="32" rx="16" fill="none" stroke="#6366F1" stroke-width="1"/>
+      <text x="200" y="21" font-family="Arial, sans-serif" font-size="13" fill="#6366F1" text-anchor="middle">💰 x402 Payments</text>
+      
+      <!-- Smart Wallets badge -->
+      <rect x="280" y="0" width="140" height="32" rx="16" fill="#8B5CF6" opacity="0.2"/>
+      <rect x="280" y="0" width="140" height="32" rx="16" fill="none" stroke="#8B5CF6" stroke-width="1"/>
+      <text x="350" y="21" font-family="Arial, sans-serif" font-size="13" fill="#8B5CF6" text-anchor="middle">🔐 Smart Wallets</text>
+      
+      <!-- Multi-Chain badge -->
+      <rect x="435" y="0" width="120" height="32" rx="16" fill="#10B981" opacity="0.2"/>
+      <rect x="435" y="0" width="120" height="32" rx="16" fill="none" stroke="#10B981" stroke-width="1"/>
+      <text x="495" y="21" font-family="Arial, sans-serif" font-size="13" fill="#10B981" text-anchor="middle">⛓️ Multi-Chain</text>
+    </g>
+  </g>
+  
+  <!-- Avalanche branding -->
+  <g transform="translate(1000, 340)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#666666">Built on</text>
+    <text x="55" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#E84142">Avalanche</text>
+    <text x="135" y="0" font-family="Arial, sans-serif" font-size="16" fill="#E84142">🔺</text>
+  </g>
+  
+  <!-- Decorative line at bottom -->
+  <rect x="0" y="395" width="1200" height="5" fill="url(#avaxGradient)"/>
+</svg>

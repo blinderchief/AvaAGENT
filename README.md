@@ -1,9 +1,11 @@
 <div align="center">
-  <img src="./assets/logo.png" alt="AvaAgent Logo" width="120" />
+  <img src="./assets/logo.svg" alt="AvaAgent Logo" width="120" />
   
   # AvaAgent 🔺
   
   **Your AI Assistants That Can Handle Money — Powered by Avalanche**
+  
+  <img src="./assets/cover.svg" alt="AvaAgent Cover" width="800" />
   
   [![Avalanche](https://img.shields.io/badge/Avalanche-E84142?style=for-the-badge&logo=avalanche&logoColor=white)](https://www.avax.network/)
   [![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)

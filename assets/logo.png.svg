@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="avaxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E84142"/>
+      <stop offset="100%" style="stop-color:#FC4F4F"/>
+    </linearGradient>
+    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="60" cy="60" r="58" fill="#0F0F0F"/>
+  <circle cx="60" cy="60" r="55" fill="none" stroke="url(#avaxGrad)" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Avalanche triangle -->
+  <polygon points="60,15 105,90 15,90" fill="none" stroke="url(#avaxGrad)" stroke-width="3"/>
+  
+  <!-- Inner AI triangle -->
+  <polygon points="60,30 90,78 30,78" fill="url(#aiGrad)" opacity="0.9"/>
+  
+  <!-- AI eye -->
+  <circle cx="60" cy="58" r="12" fill="#0F0F0F"/>
+  <circle cx="60" cy="58" r="8" fill="url(#avaxGrad)"/>
+  <circle cx="60" cy="58" r="3" fill="#FFF"/>
+  
+  <!-- Neural nodes -->
+  <circle cx="42" cy="72" r="3" fill="#6366F1"/>
+  <circle cx="78" cy="72" r="3" fill="#6366F1"/>
+  <circle cx="60" cy="30" r="3" fill="#E84142"/>
+  
+  <!-- Connections -->
+  <line x1="60" y1="30" x2="60" y2="46" stroke="#6366F1" stroke-width="1.5" opacity="0.7"/>
+  <line x1="42" y1="72" x2="52" y2="62" stroke="#6366F1" stroke-width="1.5" opacity="0.7"/>
+  <line x1="78" y1="72" x2="68" y2="62" stroke="#6366F1" stroke-width="1.5" opacity="0.7"/>
+</svg>
