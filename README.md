@@ -424,7 +424,7 @@ docker-compose up -d
 
 ## 👥 Team
 
-Built with ❤️ for the **Avalanche Hack2Build Hackathon 2024**
+Built with ❤️ for the **Avalanche Hack2Build Hackathon 2025**
 
 ## 📄 License
 
