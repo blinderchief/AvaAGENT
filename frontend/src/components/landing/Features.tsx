@@ -18,7 +18,7 @@ export function Features() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section ref={ref} id="features" className="relative py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-avalanche-950/5 to-background" />
       

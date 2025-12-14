@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Github, FileText, MessageCircle } from 'lucide-react';
 
 export function CTA() {
@@ -32,14 +33,14 @@ export function CTA() {
             <div className="absolute -inset-[1px] bg-gradient-to-r from-avalanche-500 via-kite-500 to-avalanche-500 rounded-3xl opacity-50" />
             
             <div className="relative glass-strong rounded-3xl p-12 md:p-16 text-center">
-              {/* Icon */}
+              {/* Logo */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-avalanche-500 to-avalanche-600 mb-8 animate-pulse-glow"
+                className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-avalanche-500 to-avalanche-600 mb-8 animate-pulse-glow overflow-hidden"
               >
-                <span className="text-4xl">🤖</span>
+                <Image src="/logo.svg" alt="AvaAgent" width={64} height={64} className="w-16 h-16" />
               </motion.div>
 
               {/* Heading */}
@@ -74,7 +75,7 @@ export function CTA() {
               {/* Quick Links */}
               <div className="flex items-center justify-center gap-8">
                 <a
-                  href="https://github.com/avaagent"
+                  href="https://github.com/blinderchief/AvaAGENT"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-white/40 hover:text-white transition-colors"
