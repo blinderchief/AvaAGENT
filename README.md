@@ -401,8 +401,29 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 **Production:**
 ```bash
-docker-compose up -d
+# Copy production environment files
+cp backend/.env.production backend/.env
+cp frontend/.env.production frontend/.env
+
+# Edit with your production values
+nano backend/.env
+nano frontend/.env
+
+# Deploy
+./scripts/deploy-production.sh --build --migrate
+
+# Or manually:
+docker-compose -f docker-compose.production.yml up -d --build
 ```
+
+> 📖 See [DEPLOYMENT.md](./docs/DEPLOYMENT.md) for full production deployment guide including SSL, CI/CD, and cloud platform options.
+
+### Production Checklist
+- [ ] `DEMO_MODE=false` in backend `.env`
+- [ ] Production Clerk keys configured
+- [ ] SSL certificates installed
+- [ ] Database migrated (`alembic upgrade head`)
+- [ ] Health checks passing
 
 ## 📚 Documentation
 

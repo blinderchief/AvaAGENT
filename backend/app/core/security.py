@@ -126,6 +126,43 @@ async def verify_clerk_token(token: str) -> dict[str, Any]:
         )
 
 
+# Demo user for demo mode (bypasses authentication)
+DEMO_USER = ClerkUser(
+    id="demo-user-001",
+    email="demo@avaagent.ai",
+    first_name="Demo",
+    last_name="User",
+    image_url=None,
+    metadata={"role": "admin"},
+)
+
+
+def _is_demo_mode_safe() -> bool:
+    """
+    Check if demo mode can be safely enabled.
+    
+    Demo mode is ONLY allowed when:
+    - DEMO_MODE=true in environment
+    - APP_ENV is NOT 'production'
+    
+    This prevents accidental auth bypass in production.
+    """
+    import os
+    app_env = os.getenv("APP_ENV", "development").lower()
+    
+    # Never allow demo mode in production, even if DEMO_MODE=true
+    if app_env == "production":
+        if settings.demo_mode:
+            import logging
+            logging.warning(
+                "⚠️ SECURITY: DEMO_MODE=true is IGNORED in production environment! "
+                "Authentication is enforced."
+            )
+        return False
+    
+    return settings.demo_mode
+
+
 async def get_current_user(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
 ) -> ClerkUser:
@@ -137,6 +174,14 @@ async def get_current_user(
         async def get_me(user: ClerkUser = Depends(get_current_user)):
             return user
     """
+    # =========================================================================
+    # DEMO MODE: Bypass authentication for live demos
+    # Set DEMO_MODE=true in .env to enable
+    # ⚠️ WARNING: Automatically DISABLED in production (APP_ENV=production)
+    # =========================================================================
+    if _is_demo_mode_safe():
+        return DEMO_USER
+    
     if not credentials:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

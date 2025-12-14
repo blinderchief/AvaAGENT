@@ -267,6 +267,6 @@ async def paid_resource(
         },
         "data": {
             "premium_content": "This is premium content that requires payment.",
-            "timestamp": "2024-12-06T00:00:00Z",
+            "timestamp": "2025-12-06T00:00:00Z",
         },
     }

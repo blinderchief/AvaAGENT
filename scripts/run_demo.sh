@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 # AvaAgent Demo Runner
-# Avalanche Hackathon 2024
+# Avalanche Hackathon 2025
 #
 
 echo ""
 echo "======================================================"
 echo "   AvaAgent Demo Runner"
-echo "   Avalanche Hackathon 2024"
+echo "   Avalanche Hackathon 2025"
 echo "======================================================"
 echo ""
 

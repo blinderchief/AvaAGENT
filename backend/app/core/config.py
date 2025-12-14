@@ -29,6 +29,14 @@ class Settings(BaseSettings):
     app_host: str = Field(default="0.0.0.0", description="Server host")
     app_port: int = Field(default=8000, description="Server port")
     app_workers: int = Field(default=4, description="Number of workers")
+    
+    # ==========================================================================
+    # Demo Mode (TEMPORARY - disable for production!)
+    # ==========================================================================
+    demo_mode: bool = Field(
+        default=False, 
+        description="Enable demo mode - bypasses authentication. NEVER use in production!"
+    )
 
     # ==========================================================================
     # Database Configuration (Neon PostgreSQL)

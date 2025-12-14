@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="avaxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E84142"/>
+      <stop offset="100%" style="stop-color:#FC4F4F"/>
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="#0F0F0F"/>
+  <polygon points="90,25 155,140 25,140" fill="none" stroke="url(#avaxGradient)" stroke-width="4"/>
+  <polygon points="90,45 135,120 45,120" fill="url(#aiGradient)" opacity="0.9"/>
+  <circle cx="90" cy="90" r="14" fill="#0F0F0F"/>
+  <circle cx="90" cy="90" r="10" fill="url(#avaxGradient)"/>
+  <circle cx="90" cy="90" r="4" fill="#FFF"/>
+</svg>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 import {
@@ -56,12 +57,16 @@ export function DashboardNav() {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center space-x-2 px-6 py-5 border-b border-border">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-avalanche-500 to-kite-500 flex items-center justify-center">
-              <Bot className="w-6 h-6 text-white" />
-            </div>
+          <Link href="/" className="flex items-center space-x-2 px-6 py-5 border-b border-border hover:opacity-80 transition-opacity">
+            <Image
+              src="/logo.svg"
+              alt="AvaAgent"
+              width={40}
+              height={40}
+              className="rounded-xl"
+            />
             <span className="text-xl font-bold gradient-text">AvaAgent</span>
-          </div>
+          </Link>
 
           {/* Network Selector */}
           <div className="px-4 py-4 border-b border-border">

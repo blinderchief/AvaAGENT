@@ -766,7 +766,7 @@ This demo follows the EXACT pitch presentation flow:
   ⚡ Sub-second finality on Avalanche
   📊 Full auditability and compliance
 
-[cyan]Built for Avalanche Hack2Build 2024 🔺[/cyan]
+[cyan]Built for Avalanche Hack2Build 2025 🔺[/cyan]
 """
     console.print(Panel(summary, title="🏆 AvaAgent — Agentic Infrastructure for Avalanche", border_style="green"))
     

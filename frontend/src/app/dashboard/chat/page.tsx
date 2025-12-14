@@ -122,7 +122,7 @@ export default function ChatPage() {
   };
 
   const handleSend = useCallback(async () => {
-    if (!input.trim() || isStreaming || !selectedAgentId) return;
+    if (!input.trim() || isStreaming) return;
 
     const userMessage: Message = {
       id: crypto.randomUUID(),
@@ -140,7 +140,7 @@ export default function ChatPage() {
       role: "assistant",
       content: "",
       timestamp: new Date(),
-      agent_id: selectedAgentId,
+      agent_id: selectedAgentId || undefined,
       thinking: "",
       actions: [],
     };
@@ -150,101 +150,60 @@ export default function ChatPage() {
     try {
       abortControllerRef.current = new AbortController();
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ai/chat/stream`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/ai/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           message: userMessage.content,
-          agent_id: selectedAgentId,
+          agent_id: selectedAgentId || null,
           conversation_id: messages.length > 0 ? messages[0].id : undefined,
         }),
         signal: abortControllerRef.current.signal,
       });
 
-      if (!response.ok) throw new Error("Failed to get response");
-
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-
-      if (!reader) throw new Error("No response body");
-
-      let fullContent = "";
-      let thinkingContent = "";
-      let actions: ActionResult[] = [];
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n");
-
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const data = line.slice(6);
-            if (data === "[DONE]") continue;
-
-            try {
-              const parsed = JSON.parse(data);
-
-              if (parsed.type === "thinking") {
-                thinkingContent += parsed.content;
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantMessage.id
-                      ? { ...m, thinking: thinkingContent }
-                      : m
-                  )
-                );
-              } else if (parsed.type === "content") {
-                fullContent += parsed.content;
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantMessage.id
-                      ? { ...m, content: fullContent }
-                      : m
-                  )
-                );
-              } else if (parsed.type === "action") {
-                actions = [...actions, parsed.action];
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantMessage.id
-                      ? { ...m, actions }
-                      : m
-                  )
-                );
-              }
-            } catch {
-              // Non-JSON line, append as content
-              fullContent += data;
-              setMessages((prev) =>
-                prev.map((m) =>
-                  m.id === assistantMessage.id
-                    ? { ...m, content: fullContent }
-                    : m
-                )
-              );
-            }
-          }
-        }
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || "Failed to get response");
       }
+
+      const data = await response.json();
+      
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === assistantMessage.id
+            ? { 
+                ...m, 
+                content: data.response || data.message || "I received your message but couldn't generate a response.",
+                thinking: data.thinking || "",
+                actions: data.actions || []
+              }
+            : m
+        )
+      );
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         // User cancelled the request
         return;
       }
 
+      const errorMessage = error instanceof Error ? error.message : "Failed to get response from agent";
+      
+      // Update the assistant message with error
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === assistantMessage.id
+            ? { ...m, content: `Sorry, I encountered an error: ${errorMessage}. Please try again.` }
+            : m
+        )
+      );
+
       toast({
         title: "Error",
-        description: "Failed to get response from agent",
+        description: errorMessage,
         variant: "destructive",
       });
-
-      // Remove the empty assistant message
-      setMessages((prev) => prev.filter((m) => m.id !== assistantMessage.id));
     } finally {
       setIsStreaming(false);
       abortControllerRef.current = null;
@@ -548,15 +507,11 @@ export default function ChatPage() {
           <div className="relative">
             <Textarea
               ref={textareaRef}
-              placeholder={
-                selectedAgentId
-                  ? `Message ${selectedAgent?.name || "agent"}...`
-                  : "Select an agent to start chatting"
-              }
+              placeholder="Ask me anything about trading, wallets, or blockchain..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              disabled={!selectedAgentId || isStreaming}
+              disabled={isStreaming}
               className="min-h-[56px] resize-none pr-24"
               rows={1}
             />
@@ -576,7 +531,7 @@ export default function ChatPage() {
                   variant="gradient"
                   className="h-9 w-9"
                   onClick={handleSend}
-                  disabled={!input.trim() || !selectedAgentId}
+                  disabled={!input.trim()}
                 >
                   <Send className="h-4 w-4" />
                 </Button>

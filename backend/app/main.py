@@ -151,11 +151,11 @@ async def error_handling_middleware(
 # Routers
 # ============================================================================
 
-# Health checks (no auth)
-app.include_router(health_router)
-
 # API v1 routes
 api_v1_prefix = "/api/v1"
+
+# Health checks (no auth required)
+app.include_router(health_router, prefix=api_v1_prefix)
 
 app.include_router(agents_router, prefix=api_v1_prefix)
 app.include_router(wallets_router, prefix=api_v1_prefix)
@@ -178,7 +178,7 @@ async def root():
         "version": "1.0.0",
         "description": "The Agentic Operating System for Avalanche",
         "docs": "/docs" if settings.app_debug else None,
-        "health": "/health",
+        "health": "/api/v1/health",
         "api": {
             "v1": api_v1_prefix,
         },
