@@ -39,12 +39,19 @@ const nextConfig = {
     ];
   },
   
-  // API rewrites
+  // API rewrites - only apply when backend URL is configured (for local/Docker development)
   async rewrites() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+    // Skip rewrites if API URL is not configured (e.g., Vercel deployment)
+    if (!apiUrl) {
+      return [];
+    }
+    
     return [
       {
         source: '/api/v1/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/:path*`,
+        destination: `${apiUrl}/api/v1/:path*`,
       },
     ];
   },
